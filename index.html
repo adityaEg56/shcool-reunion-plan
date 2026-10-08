@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Reunion 2026</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="badge">🎒 Class Reunion</span>
+      <h1>School Days Reunion 🎓</h1>
+      <p>4 saal baad... Wahi purani dosti, wahi purane dost!</p>
+      <div class="hero-btns">
+        <button id="openLetterBtn" class="btn-secondary">
+          <i class="fa-regular fa-envelope"></i> Invite Letter Padhein
+        </button>
+        <a href="#rsvpSection" class="btn-primary">
+          <i class="fa-solid fa-check-double"></i> Confirmation Form
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Invitation Modal (Short & Realistic Letter) -->
+  <div class="modal-overlay" id="letterModal" style="display: none;">
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="closeLetterBtn">&times;</button>
+      <div class="modal-badge">💌 Reunion Invite</div>
+      <h2>4 Saal Ho Gaye School Chhute... Ek Baar Phir Milte Hain! 🎒✨</h2>
+      <hr class="modal-divider">
+      
+      <p class="modal-text">
+        School passout hue 4 saal ho gaye. Ab sab apni-apni jobs, padhai aur naye safar me busy hone lage hain.
+      </p>
+      <p class="modal-text">
+        Isse pehle ki sab life me aur aage nikal jayein aur milna mushkil ho jaye, aao ek din sab saath baithte hain!
+      </p>
+      <p class="modal-text">
+        <strong>No show-off, no formality</strong>—bas wahi purana batch, wahi purane dost aur bina filter ki baatein.
+      </p>
+
+      <button type="button" class="btn-primary" style="width: 100%; margin-top: 15px;" id="modalRsvpBtn">
+        Form Fill Karein 👉
+      </button>
+    </div>
+  </div>
+
+  <!-- RSVP Form Section -->
+  <section id="rsvpSection" class="container">
+    <div class="card">
+      <h2>Reunion Attendance Form 📝</h2>
+      <p class="subtitle">Apna status batao taaki hum WhatsApp Group aur venue finalize kar sakein.</p>
+
+      <form id="rsvpForm" onsubmit="return false;">
+        <div class="form-group">
+          <label for="userName">Aapka Poora Naam / Nickname *</label>
+          <input type="text" id="userName" placeholder="Ex: Rahul Sharma" required>
+        </div>
+
+        <div class="form-group">
+          <label for="userPhone">WhatsApp Number *</label>
+          <input type="tel" id="userPhone" placeholder="10-digit number" required>
+        </div>
+
+        <div class="form-group">
+          <label for="userAttendance">Kya Aap Aa Rahe Hain? *</label>
+          <select id="userAttendance">
+            <option value="Haan, Main 100% Aa Raha Hu 🎉">Haan, Main 100% Aa Raha Hu 🎉</option>
+            <option value="Nahi, Iss Baar Nahi Aa Paunga ❌">Nahi, Iss Baar Nahi Aa Paunga ❌</option>
+          </select>
+        </div>
+
+        <button type="button" id="submitRsvpBtn" class="btn-primary full-width">
+          Submit Response
+        </button>
+      </form>
+
+      <!-- Success Screen -->
+      <div id="successCard" style="display: none;" class="success-screen">
+        <h3 id="responseGreeting">Shukriya!</h3>
+        <p id="responseText"></p>
+        
+        <div class="action-box" style="margin-top: 20px;">
+          <a id="whatsappSendBtn" href="#" target="_blank" class="btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Join WhatsApp Reunion Group</span>
+          </a>
+        </div>
+
+        <button type="button" id="editRsvpBtn" class="btn-link" style="margin-top: 15px;">Response Edit Karein</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
