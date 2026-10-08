@@ -1,12 +1,372 @@
-// =============================================
+// =====================================================
 // SCHOOL UNION 2026
-// COMPLETE WEBSITE SCRIPT
-// =============================================
+// FINAL WEBSITE SCRIPT
+// =====================================================
 
 
-// =============================================
-// GET ELEMENTS
-// =============================================
+// =====================================================
+// OPENING FIREWORKS
+// =====================================================
+
+window.addEventListener("load", () => {
+
+    const opening =
+        document.getElementById("openingCelebration");
+
+    const canvas =
+        document.getElementById("fireworksCanvas");
+
+    if (!opening || !canvas) return;
+
+    const ctx =
+        canvas.getContext("2d");
+
+    let width;
+    let height;
+
+    let fireworks = [];
+    let particles = [];
+
+
+    function resizeCanvas() {
+
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+
+    }
+
+    resizeCanvas();
+
+    window.addEventListener(
+        "resize",
+        resizeCanvas
+    );
+
+
+    // ---------------------------------------------
+    // FIREWORK CLASS
+    // ---------------------------------------------
+
+    class Firework {
+
+        constructor(x, targetY) {
+
+            this.x = x;
+            this.y = height;
+            this.targetY = targetY;
+
+            this.speed =
+                8 + Math.random() * 3;
+        }
+
+
+        update() {
+
+            this.y -= this.speed;
+
+            if (this.y <= this.targetY) {
+
+                this.explode();
+
+                return true;
+
+            }
+
+            return false;
+        }
+
+
+        explode() {
+
+            const count =
+                55 + Math.floor(
+                    Math.random() * 35
+                );
+
+
+            for (let i = 0; i < count; i++) {
+
+                const angle =
+                    Math.PI * 2 * (i / count);
+
+                const speed =
+                    2 + Math.random() * 5;
+
+
+                particles.push(
+                    new Particle(
+                        this.x,
+                        this.y,
+                        angle,
+                        speed
+                    )
+                );
+
+            }
+
+        }
+
+
+        draw() {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                this.x,
+                this.y,
+                2,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "#f1d99a";
+
+            ctx.fill();
+
+        }
+
+    }
+
+
+    // ---------------------------------------------
+    // PARTICLE CLASS
+    // ---------------------------------------------
+
+    class Particle {
+
+        constructor(
+            x,
+            y,
+            angle,
+            speed
+        ) {
+
+            this.x = x;
+            this.y = y;
+
+            this.vx =
+                Math.cos(angle) * speed;
+
+            this.vy =
+                Math.sin(angle) * speed;
+
+            this.life = 1;
+
+            this.decay =
+                0.012 +
+                Math.random() * 0.018;
+
+            this.size =
+                1 +
+                Math.random() * 2;
+
+        }
+
+
+        update() {
+
+            this.x += this.vx;
+            this.y += this.vy;
+
+            this.vy += 0.035;
+
+            this.vx *= 0.985;
+            this.vy *= 0.985;
+
+            this.life -= this.decay;
+
+            return this.life > 0;
+
+        }
+
+
+        draw() {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                this.x,
+                this.y,
+                this.size,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                `rgba(
+                    241,
+                    217,
+                    154,
+                    ${this.life}
+                )`;
+
+            ctx.shadowBlur = 12;
+
+            ctx.shadowColor =
+                "#f1d99a";
+
+            ctx.fill();
+
+            ctx.shadowBlur = 0;
+
+        }
+
+    }
+
+
+    // ---------------------------------------------
+    // LAUNCH
+    // ---------------------------------------------
+
+    function launchFirework() {
+
+        const x =
+            width *
+            (
+                0.12 +
+                Math.random() * 0.76
+            );
+
+
+        const targetY =
+            height *
+            (
+                0.12 +
+                Math.random() * 0.38
+            );
+
+
+        fireworks.push(
+            new Firework(
+                x,
+                targetY
+            )
+        );
+
+    }
+
+
+    // ---------------------------------------------
+    // ANIMATION
+    // ---------------------------------------------
+
+    function animate() {
+
+        ctx.fillStyle =
+            "rgba(2,2,2,0.18)";
+
+        ctx.fillRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        fireworks =
+            fireworks.filter(
+                firework => {
+
+                    const exploded =
+                        firework.update();
+
+                    if (!exploded) {
+                        firework.draw();
+                    }
+
+                    return !exploded;
+
+                }
+            );
+
+
+        particles =
+            particles.filter(
+                particle => {
+
+                    const alive =
+                        particle.update();
+
+                    if (alive) {
+                        particle.draw();
+                    }
+
+                    return alive;
+
+                }
+            );
+
+
+        requestAnimationFrame(animate);
+
+    }
+
+
+    animate();
+
+
+    // ---------------------------------------------
+    // GRAND OPENING
+    // ---------------------------------------------
+
+    launchFirework();
+
+    setTimeout(
+        launchFirework,
+        300
+    );
+
+    setTimeout(
+        launchFirework,
+        650
+    );
+
+    setTimeout(
+        launchFirework,
+        1000
+    );
+
+    setTimeout(
+        launchFirework,
+        1350
+    );
+
+    setTimeout(
+        launchFirework,
+        1750
+    );
+
+    setTimeout(
+        launchFirework,
+        2150
+    );
+
+
+    // ---------------------------------------------
+    // CLOSE OPENING
+    // ---------------------------------------------
+
+    setTimeout(() => {
+
+        opening.classList.add("hide");
+
+    }, 4200);
+
+
+    setTimeout(() => {
+
+        opening.remove();
+
+    }, 5600);
+
+});
+
+
+
+// =====================================================
+// ELEMENTS
+// =====================================================
 
 const interestedBtn =
     document.getElementById("interestedBtn");
@@ -30,9 +390,10 @@ const whyModal =
     document.getElementById("whyModal");
 
 
-// =============================================
-// CLOSE BUTTONS
-// =============================================
+
+// =====================================================
+// BUTTONS
+// =====================================================
 
 const closeInterest =
     document.getElementById("closeInterest");
@@ -58,124 +419,198 @@ const finalSkip =
 const exitBtn =
     document.getElementById("exitBtn");
 
-
-// =============================================
-// WHY REUNION
-// =============================================
-
 const whyBtn =
     document.getElementById("whyBtn");
 
 
-whyBtn.addEventListener("click", () => {
 
-    whyModal.classList.add("active");
+// =====================================================
+// WHY REUNION
+// =====================================================
 
-});
+if (whyBtn) {
+
+    whyBtn.addEventListener(
+        "click",
+        () => {
+
+            whyModal.classList.add(
+                "active"
+            );
+
+        }
+    );
+
+}
 
 
-closeWhy.addEventListener("click", () => {
+if (closeWhy) {
 
-    whyModal.classList.remove("active");
+    closeWhy.addEventListener(
+        "click",
+        () => {
 
-});
+            whyModal.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+}
 
 
-closeStory.addEventListener("click", () => {
+if (closeStory) {
 
-    whyModal.classList.remove("active");
+    closeStory.addEventListener(
+        "click",
+        () => {
 
-});
+            whyModal.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+}
 
 
-// =============================================
+
+// =====================================================
 // INTERESTED
-// =============================================
+// =====================================================
 
-interestedBtn.addEventListener("click", () => {
+interestedBtn.addEventListener(
+    "click",
+    () => {
 
-    interestModal.classList.add("active");
+        interestModal.classList.add(
+            "active"
+        );
 
-    createConfetti();
+        createConfetti();
 
-});
+    }
+);
 
 
-// =============================================
+
+// =====================================================
 // CLOSE INTEREST
-// =============================================
+// =====================================================
 
-closeInterest.addEventListener("click", () => {
+closeInterest.addEventListener(
+    "click",
+    () => {
 
-    interestModal.classList.remove("active");
+        interestModal.classList.remove(
+            "active"
+        );
 
-});
+    }
+);
 
 
-// =============================================
+
+// =====================================================
 // NOT INTERESTED
-// =============================================
+// =====================================================
 
-skipBtn.addEventListener("click", () => {
+skipBtn.addEventListener(
+    "click",
+    () => {
 
-    skipModal.classList.add("active");
+        skipModal.classList.add(
+            "active"
+        );
 
-});
+    }
+);
 
 
-// =============================================
+
+// =====================================================
 // CLOSE SKIP
-// =============================================
+// =====================================================
 
-closeSkip.addEventListener("click", () => {
+closeSkip.addEventListener(
+    "click",
+    () => {
 
-    skipModal.classList.remove("active");
+        skipModal.classList.remove(
+            "active"
+        );
 
-});
+    }
+);
 
 
-// =============================================
+
+// =====================================================
 // THINK AGAIN
-// =============================================
+// =====================================================
 
-thinkAgain.addEventListener("click", () => {
+thinkAgain.addEventListener(
+    "click",
+    () => {
 
-    skipModal.classList.remove("active");
+        skipModal.classList.remove(
+            "active"
+        );
 
-    interestModal.classList.add("active");
+        interestModal.classList.add(
+            "active"
+        );
 
-    createConfetti();
+        createConfetti();
 
-});
+    }
+);
 
 
-// =============================================
+
+// =====================================================
 // FINAL SKIP
-// =============================================
+// =====================================================
 
-finalSkip.addEventListener("click", () => {
+finalSkip.addEventListener(
+    "click",
+    () => {
 
-    skipModal.classList.remove("active");
+        skipModal.classList.remove(
+            "active"
+        );
 
-    finalSkipModal.classList.add("active");
+        finalSkipModal.classList.add(
+            "active"
+        );
 
-});
+    }
+);
 
 
-// =============================================
+
+// =====================================================
 // EXIT
-// =============================================
+// =====================================================
 
-exitBtn.addEventListener("click", () => {
+exitBtn.addEventListener(
+    "click",
+    () => {
 
-    finalSkipModal.classList.remove("active");
+        finalSkipModal.classList.remove(
+            "active"
+        );
 
-});
+    }
+);
 
 
-// =============================================
-// FORM
-// =============================================
+
+// =====================================================
+// INTEREST FORM
+// =====================================================
 
 const interestForm =
     document.getElementById("interestForm");
@@ -208,50 +643,57 @@ interestForm.addEventListener(
                 .value;
 
 
-        // NAME CHECK
+        // -----------------------------------------
+        // VALIDATION
+        // -----------------------------------------
 
-        if (name === "") {
+        if (!name) {
 
             alert(
                 "Bro, naam toh batao 😄"
             );
 
             return;
+
         }
 
 
-        // PHONE CHECK
-
-        if (!/^[0-9]{10}$/.test(phone)) {
+        if (
+            !/^[0-9]{10}$/.test(phone)
+        ) {
 
             alert(
                 "Please valid 10 digit WhatsApp number enter karo."
             );
 
             return;
+
         }
 
 
-        // PEOPLE CHECK
-
-        if (people === "") {
+        if (!people) {
 
             alert(
                 "Kitne log aa rahe ho, woh select karo."
             );
 
             return;
+
         }
 
 
+        // -----------------------------------------
         // CLOSE FORM
+        // -----------------------------------------
 
         interestModal.classList.remove(
             "active"
         );
 
 
-        // SUCCESS POPUP
+        // -----------------------------------------
+        // SHOW SUCCESS
+        // -----------------------------------------
 
         setTimeout(() => {
 
@@ -264,19 +706,14 @@ interestForm.addEventListener(
         }, 250);
 
 
-        // =====================================
+        // -----------------------------------------
         // TEMPORARY DATA
-        // =====================================
+        // -----------------------------------------
         //
-        // Abhi backend/database connected nahi hai.
+        // Real private database later connect hoga.
+        // Abhi testing ke liye console mein data.
         //
-        // Isliye data console mein show hoga.
-        //
-        // Later:
-        // Firebase / Supabase / backend
-        // se connect kar sakte hain.
-        //
-        // =====================================
+        // -----------------------------------------
 
         console.log({
 
@@ -298,30 +735,35 @@ interestForm.addEventListener(
 );
 
 
-// =============================================
-// SUCCESS DONE
-// =============================================
 
-doneBtn.addEventListener("click", () => {
+// =====================================================
+// SUCCESS CLOSE
+// =====================================================
 
-    successModal.classList.remove(
-        "active"
-    );
+doneBtn.addEventListener(
+    "click",
+    () => {
 
-});
+        successModal.classList.remove(
+            "active"
+        );
+
+    }
+);
 
 
-// =============================================
+
+// =====================================================
 // CLICK OUTSIDE MODAL
-// =============================================
+// =====================================================
 
 document
     .querySelectorAll(".modal")
-    .forEach((modal) => {
+    .forEach(modal => {
 
         modal.addEventListener(
             "click",
-            (event) => {
+            event => {
 
                 if (
                     event.target === modal
@@ -339,19 +781,22 @@ document
     });
 
 
-// =============================================
-// ESC KEY
-// =============================================
+
+// =====================================================
+// ESCAPE KEY
+// =====================================================
 
 document.addEventListener(
     "keydown",
-    (event) => {
+    event => {
 
-        if (event.key === "Escape") {
+        if (
+            event.key === "Escape"
+        ) {
 
             document
                 .querySelectorAll(".modal")
-                .forEach((modal) => {
+                .forEach(modal => {
 
                     modal.classList.remove(
                         "active"
@@ -365,9 +810,10 @@ document.addEventListener(
 );
 
 
-// =============================================
+
+// =====================================================
 // CONFETTI
-// =============================================
+// =====================================================
 
 function createConfetti() {
 
@@ -378,13 +824,11 @@ function createConfetti() {
 
 
     const symbols = [
-
         "✨",
         "🎉",
         "❤️",
         "🥂",
         "🎊"
-
     ];
 
 
@@ -393,7 +837,6 @@ function createConfetti() {
         i < 45;
         i++
     ) {
-
 
         const confetti =
             document.createElement(
@@ -444,420 +887,63 @@ function createConfetti() {
         );
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            confetti.remove();
+                confetti.remove();
 
-        }, 4000);
+            },
+            4000
+        );
 
     }
 
 }
 // =============================================
-// OPENING FIREWORKS CELEBRATION
+// PAGE NAVIGATION
 // =============================================
 
-window.addEventListener("load", () => {
+const backBtn =
+    document.getElementById("backBtn");
 
-    const opening =
-        document.getElementById(
-            "openingCelebration"
-        );
+const homeBtn =
+    document.getElementById("homeBtn");
 
-    const canvas =
-        document.getElementById(
-            "fireworksCanvas"
-        );
+const nextBtn =
+    document.getElementById("nextBtn");
 
-    const ctx =
-        canvas.getContext("2d");
 
+// BACK
 
-    let width;
-    let height;
+backBtn.addEventListener("click", () => {
 
-    let fireworks = [];
-    let particles = [];
+    window.scrollBy({
+        top: -window.innerHeight * 0.85,
+        behavior: "smooth"
+    });
 
+});
 
-    function resizeCanvas() {
 
-        width =
-            canvas.width =
-            window.innerWidth;
+// HOME
 
-        height =
-            canvas.height =
-            window.innerHeight;
+homeBtn.addEventListener("click", () => {
 
-    }
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
+});
 
-    resizeCanvas();
 
-    window.addEventListener(
-        "resize",
-        resizeCanvas
-    );
+// NEXT
 
+nextBtn.addEventListener("click", () => {
 
-    // =========================================
-    // FIREWORK
-    // =========================================
-
-    class Firework {
-
-        constructor(
-            x,
-            targetY
-        ) {
-
-            this.x = x;
-
-            this.y = height;
-
-            this.targetY = targetY;
-
-            this.speed =
-                8 + Math.random() * 3;
-
-            this.exploded = false;
-
-        }
-
-
-        update() {
-
-            this.y -= this.speed;
-
-
-            if (
-                this.y <=
-                this.targetY
-            ) {
-
-                this.explode();
-
-                return true;
-
-            }
-
-            return false;
-
-        }
-
-
-        explode() {
-
-            const particleCount =
-                55 + Math.floor(
-                    Math.random() * 35
-                );
-
-
-            for (
-                let i = 0;
-                i < particleCount;
-                i++
-            ) {
-
-                const angle =
-                    (
-                        Math.PI * 2
-                    )
-                    *
-                    (
-                        i /
-                        particleCount
-                    );
-
-
-                const speed =
-                    2 +
-                    Math.random() * 5;
-
-
-                particles.push(
-
-                    new Particle(
-                        this.x,
-                        this.y,
-                        angle,
-                        speed
-                    )
-
-                );
-
-            }
-
-        }
-
-
-        draw() {
-
-            ctx.beginPath();
-
-            ctx.arc(
-                this.x,
-                this.y,
-                2,
-                0,
-                Math.PI * 2
-            );
-
-            ctx.fillStyle =
-                "#f1d99a";
-
-            ctx.fill();
-
-        }
-
-    }
-
-
-    // =========================================
-    // PARTICLES
-    // =========================================
-
-    class Particle {
-
-        constructor(
-            x,
-            y,
-            angle,
-            speed
-        ) {
-
-            this.x = x;
-
-            this.y = y;
-
-            this.vx =
-                Math.cos(angle)
-                * speed;
-
-            this.vy =
-                Math.sin(angle)
-                * speed;
-
-            this.life = 1;
-
-            this.decay =
-                0.012 +
-                Math.random() * 0.018;
-
-            this.size =
-                1 +
-                Math.random() * 2;
-
-        }
-
-
-        update() {
-
-            this.x += this.vx;
-
-            this.y += this.vy;
-
-            this.vy += 0.035;
-
-            this.vx *= 0.985;
-
-            this.vy *= 0.985;
-
-            this.life -=
-                this.decay;
-
-
-            return this.life > 0;
-
-        }
-
-
-        draw() {
-
-            ctx.beginPath();
-
-            ctx.arc(
-                this.x,
-                this.y,
-                this.size,
-                0,
-                Math.PI * 2
-            );
-
-
-            ctx.fillStyle =
-                `rgba(
-                    241,
-                    217,
-                    154,
-                    ${this.life}
-                )`;
-
-
-            ctx.shadowBlur = 12;
-
-            ctx.shadowColor =
-                "#f1d99a";
-
-            ctx.fill();
-
-            ctx.shadowBlur = 0;
-
-        }
-
-    }
-
-
-    // =========================================
-    // CREATE FIREWORK
-    // =========================================
-
-    function launchFirework() {
-
-        const x =
-            width *
-            (
-                0.15 +
-                Math.random() * 0.7
-            );
-
-
-        const targetY =
-            height *
-            (
-                0.15 +
-                Math.random() * 0.35
-            );
-
-
-        fireworks.push(
-            new Firework(
-                x,
-                targetY
-            )
-        );
-
-    }
-
-
-    // =========================================
-    // ANIMATION
-    // =========================================
-
-    function animate() {
-
-        ctx.fillStyle =
-            "rgba(2,2,2,0.18)";
-
-        ctx.fillRect(
-            0,
-            0,
-            width,
-            height
-        );
-
-
-        fireworks =
-            fireworks.filter(
-                (firework) => {
-
-                    const done =
-                        firework.update();
-
-                    if (!done) {
-
-                        firework.draw();
-
-                    }
-
-                    return !done;
-
-                }
-            );
-
-
-        particles =
-            particles.filter(
-                (particle) => {
-
-                    const alive =
-                        particle.update();
-
-                    if (alive) {
-
-                        particle.draw();
-
-                    }
-
-                    return alive;
-
-                }
-            );
-
-
-        requestAnimationFrame(
-            animate
-        );
-
-    }
-
-
-    animate();
-
-
-    // =========================================
-    // GRAND OPENING FIREWORKS
-    // =========================================
-
-    launchFirework();
-
-    setTimeout(
-        launchFirework,
-        350
-    );
-
-    setTimeout(
-        launchFirework,
-        700
-    );
-
-    setTimeout(
-        launchFirework,
-        1100
-    );
-
-    setTimeout(
-        launchFirework,
-        1500
-    );
-
-    setTimeout(
-        launchFirework,
-        1900
-    );
-
-
-    // =========================================
-    // CLOSE OPENING
-    // =========================================
-
-    setTimeout(() => {
-
-        opening.classList.add(
-            "hide"
-        );
-
-    }, 4200);
-
-
-    // Remove from screen after animation
-
-    setTimeout(() => {
-
-        opening.remove();
-
-    }, 5600);
+    window.scrollBy({
+        top: window.innerHeight * 0.85,
+        behavior: "smooth"
+    });
 
 });

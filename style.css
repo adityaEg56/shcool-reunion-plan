@@ -6,8 +6,8 @@
 
 :root {
     --bg: #07070a;
-    --card: rgba(255, 255, 255, 0.055);
-    --border: rgba(255, 255, 255, 0.11);
+    --card: rgba(255,255,255,0.055);
+    --border: rgba(255,255,255,0.11);
     --text: #f7f5f0;
     --muted: #aaa7a0;
     --gold: #d6b36a;
@@ -25,10 +25,20 @@ body {
     overflow-x: hidden;
 }
 
+button,
+input,
+select {
+    font: inherit;
+}
 
-/* ==============================
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =====================================================
    BACKGROUND
-============================== */
+===================================================== */
 
 .background-glow {
     position: fixed;
@@ -54,9 +64,116 @@ body {
 }
 
 
-/* ==============================
+/* =====================================================
+   OPENING CELEBRATION
+===================================================== */
+
+#openingCelebration {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at center,
+            #17130d 0%,
+            #080808 45%,
+            #020202 100%
+        );
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+#openingCelebration.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#fireworksCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.opening-content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 25px;
+    animation: openingReveal 2s ease forwards;
+}
+
+.opening-small {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.opening-content h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(42px, 8vw, 85px);
+    line-height: 1;
+    color: #f7f5f0;
+    text-shadow:
+        0 0 35px rgba(214,179,106,0.25);
+}
+
+.opening-content h1 span {
+    display: block;
+    color: var(--gold-light);
+    font-style: italic;
+    margin-top: 8px;
+}
+
+.opening-content p {
+    margin-top: 25px;
+    color: #ddd;
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+}
+
+.opening-line {
+    width: 70px;
+    height: 1px;
+    background: var(--gold);
+    margin: 25px auto;
+}
+
+.opening-content small {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+@keyframes openingReveal {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(15px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.02) translateY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+/* =====================================================
    NAVBAR
-============================== */
+===================================================== */
 
 .navbar {
     width: 100%;
@@ -116,9 +233,9 @@ body {
 }
 
 
-/* ==============================
+/* =====================================================
    HERO
-============================== */
+===================================================== */
 
 .hero {
     min-height: 820px;
@@ -130,6 +247,7 @@ body {
 }
 
 .hero-content {
+    width: 100%;
     max-width: 850px;
 }
 
@@ -162,9 +280,9 @@ body {
 }
 
 
-/* ==============================
+/* =====================================================
    DATE
-============================== */
+===================================================== */
 
 .event-date {
     margin: 45px auto 35px;
@@ -199,9 +317,9 @@ body {
 }
 
 
-/* ==============================
+/* =====================================================
    EVENT DETAILS
-============================== */
+===================================================== */
 
 .event-details {
     display: flex;
@@ -240,9 +358,9 @@ body {
 }
 
 
-/* ==============================
-   MAIN QUESTION
-============================== */
+/* =====================================================
+   QUESTION
+===================================================== */
 
 .main-question {
     margin-top: 65px;
@@ -260,9 +378,9 @@ body {
 }
 
 
-/* ==============================
+/* =====================================================
    CHOICE BUTTONS
-============================== */
+===================================================== */
 
 .choice-buttons {
     margin-top: 25px;
@@ -277,20 +395,28 @@ body {
     cursor: pointer;
     padding: 17px 27px;
     border-radius: 50px;
-    font-family: inherit;
     font-weight: 600;
     transition: 0.3s;
 }
 
 .interested-btn {
-    background: linear-gradient(135deg, #e5c37b, #b98a39);
+    background: linear-gradient(
+        135deg,
+        #e5c37b,
+        #b98a39
+    );
+
     color: #17130b;
-    box-shadow: 0 10px 35px rgba(203,160,72,0.18);
+
+    box-shadow:
+        0 10px 35px rgba(203,160,72,0.18);
 }
 
 .interested-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 45px rgba(203,160,72,0.3);
+
+    box-shadow:
+        0 15px 45px rgba(203,160,72,0.3);
 }
 
 .skip-btn {
@@ -311,9 +437,9 @@ body {
 }
 
 
-/* ==============================
-   WHY REUNION BUTTON
-============================== */
+/* =====================================================
+   WHY REUNION
+===================================================== */
 
 .why-section {
     display: flex;
@@ -322,46 +448,39 @@ body {
 }
 
 .why-btn {
-    position: relative;
     min-width: 280px;
     padding: 18px 35px;
-
     border: 1px solid rgba(214,179,106,0.45);
     border-radius: 50px;
 
-    background: linear-gradient(
-        135deg,
-        rgba(214,179,106,0.14),
-        rgba(255,255,255,0.035)
-    );
+    background:
+        linear-gradient(
+            135deg,
+            rgba(214,179,106,0.14),
+            rgba(255,255,255,0.035)
+        );
 
     color: var(--gold-light);
 
-    font-family: "DM Sans", sans-serif;
     font-size: 14px;
     font-weight: 600;
 
     cursor: pointer;
 
-    box-shadow: 0 0 25px rgba(214,179,106,0.08);
+    box-shadow:
+        0 0 25px rgba(214,179,106,0.08);
 
     transition: all 0.35s ease;
 
     animation: whyPulse 2.5s infinite;
 }
 
-.why-btn span {
-    margin-right: 7px;
-}
-
 .why-btn small {
     display: block;
     margin-top: 5px;
-
     color: #777;
     font-size: 8px;
     font-weight: 400;
-
     letter-spacing: 2px;
     text-transform: uppercase;
 }
@@ -369,9 +488,6 @@ body {
 .why-btn:hover {
     transform: translateY(-4px) scale(1.02);
     border-color: var(--gold);
-
-    box-shadow:
-        0 10px 40px rgba(214,179,106,0.18);
 }
 
 @keyframes whyPulse {
@@ -388,9 +504,9 @@ body {
 }
 
 
-/* ==============================
-   MEMORY SECTION
-============================== */
+/* =====================================================
+   MEMORY
+===================================================== */
 
 .memory-section {
     max-width: 1000px;
@@ -462,9 +578,9 @@ body {
 }
 
 
-/* ==============================
-   WHATSAPP SECTION
-============================== */
+/* =====================================================
+   WHATSAPP
+===================================================== */
 
 .whatsapp-section {
     max-width: 1000px;
@@ -474,11 +590,12 @@ body {
     border: 1px solid var(--border);
     border-radius: 25px;
 
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.05),
-        rgba(255,255,255,0.015)
-    );
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.015)
+        );
 
     display: flex;
     gap: 40px;
@@ -517,9 +634,11 @@ body {
     margin-top: 22px;
     padding: 15px;
 
-    background: rgba(214,179,106,0.06);
+    background:
+        rgba(214,179,106,0.06);
 
-    border: 1px solid rgba(214,179,106,0.15);
+    border:
+        1px solid rgba(214,179,106,0.15);
 
     border-radius: 12px;
 
@@ -534,15 +653,13 @@ body {
 }
 
 
-/* ==============================
+/* =====================================================
    FOOTER
-============================== */
+===================================================== */
 
 footer {
     padding: 55px 20px;
-
     border-top: 1px solid var(--border);
-
     text-align: center;
 }
 
@@ -554,13 +671,9 @@ footer {
 
 footer p {
     color: #777;
-
     font-family: "Playfair Display", serif;
-
     font-style: italic;
-
     margin: 15px auto 25px;
-
     max-width: 500px;
 }
 
@@ -570,31 +683,31 @@ footer span {
 }
 
 
-/* ==============================
-   MODAL
-============================== */
+/* =====================================================
+   MODALS
+===================================================== */
 
 .modal {
     position: fixed;
     inset: 0;
 
-    background: rgba(0,0,0,0.82);
+    background:
+        rgba(0,0,0,0.84);
 
     backdrop-filter: blur(12px);
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    padding: 20px;
+    padding: 16px;
 
     opacity: 0;
     visibility: hidden;
 
     transition: 0.3s;
 
-    z-index: 100;
+    z-index: 1000;
 }
 
 .modal.active {
@@ -605,6 +718,10 @@ footer span {
 .modal-box {
     width: 100%;
     max-width: 480px;
+
+    max-height: 92vh;
+
+    overflow-y: auto;
 
     background: #111115;
 
@@ -618,23 +735,28 @@ footer span {
 
     position: relative;
 
-    transform: translateY(20px) scale(0.97);
+    transform:
+        translateY(20px)
+        scale(0.97);
 
     transition: 0.3s;
+
+    scrollbar-width: thin;
 }
 
 .modal.active .modal-box {
-    transform: translateY(0) scale(1);
+    transform:
+        translateY(0)
+        scale(1);
 }
 
 .close-btn {
     position: absolute;
 
-    top: 15px;
-    right: 18px;
+    top: 12px;
+    right: 17px;
 
     background: none;
-
     border: none;
 
     color: #777;
@@ -642,12 +764,14 @@ footer span {
     font-size: 28px;
 
     cursor: pointer;
+
+    z-index: 2;
 }
 
 
-/* ==============================
-   INTEREST POPUP
-============================== */
+/* =====================================================
+   FORM
+===================================================== */
 
 .success-icon,
 .big-success,
@@ -658,11 +782,8 @@ footer span {
 
 .modal-label {
     color: var(--gold);
-
     font-size: 9px;
-
     letter-spacing: 4px;
-
     margin-bottom: 10px;
 }
 
@@ -678,18 +799,10 @@ footer span {
 
 .modal-box > p {
     color: #888;
-
     line-height: 1.7;
-
     font-size: 13px;
-
     margin: 15px auto 25px;
 }
-
-
-/* ==============================
-   FORM
-============================== */
 
 .input-group {
     text-align: left;
@@ -698,17 +811,13 @@ footer span {
 
 .input-group label {
     display: block;
-
     font-size: 10px;
-
     color: #999;
-
     margin-bottom: 7px;
 }
 
 .input-group input,
 .input-group select {
-
     width: 100%;
 
     background: #19191e;
@@ -722,8 +831,6 @@ footer span {
     border-radius: 10px;
 
     outline: none;
-
-    font-family: inherit;
 }
 
 .input-group input:focus,
@@ -733,7 +840,6 @@ footer span {
 
 .submit-btn,
 .done-btn {
-
     width: 100%;
 
     margin-top: 10px;
@@ -760,16 +866,12 @@ footer span {
 
 .form-note {
     display: block;
-
     margin-top: 12px;
-
     color: #555;
-
     font-size: 9px;
 }
 
 .success-message {
-
     background:
         rgba(214,179,106,0.07);
 
@@ -794,9 +896,9 @@ footer span {
 }
 
 
-/* ==============================
-   SKIP POPUP
-============================== */
+/* =====================================================
+   SKIP
+===================================================== */
 
 .skip-buttons {
     display: flex;
@@ -806,18 +908,12 @@ footer span {
 
 .think-btn,
 .final-skip-btn {
-
     padding: 13px;
-
     border-radius: 10px;
-
     cursor: pointer;
-
-    font-family: inherit;
 }
 
 .think-btn {
-
     border: none;
 
     background:
@@ -828,47 +924,29 @@ footer span {
         );
 
     color: #17130b;
-
     font-weight: 600;
 }
 
 .final-skip-btn {
-
     background: transparent;
-
     border: 1px solid var(--border);
-
     color: #777;
 }
 
 
-/* ==============================
+/* =====================================================
    WHY REUNION MODAL
-============================== */
+===================================================== */
 
 .why-modal-box {
-
     max-width: 650px;
-
-    max-height: 88vh;
-
-    overflow-y: auto;
-
+    max-height: 90vh;
     padding: 45px 40px;
-
     text-align: center;
-
-    scrollbar-width: thin;
-
-    scrollbar-color:
-        #6d5730
-        transparent;
 }
 
 .why-heart {
-
     font-size: 42px;
-
     margin-bottom: 10px;
 
     animation:
@@ -887,47 +965,31 @@ footer span {
 }
 
 .why-modal-box h2 {
-
     font-size: 38px;
-
     margin-bottom: 25px;
 }
 
 .why-modal-box h2 span {
-
     color: var(--gold-light);
-
     font-style: italic;
 }
 
-
-/* ==============================
-   EMOTIONAL MESSAGE
-============================== */
-
 .emotional-message {
-
     text-align: left;
-
     color: #aaa;
-
     font-size: 13px;
-
     line-height: 1.85;
 }
 
 .emotional-message p {
-
     margin-bottom: 20px;
 }
 
 .emotional-message strong {
-
     color: #eee;
 }
 
 .highlight-line {
-
     text-align: center;
 
     font-family:
@@ -942,7 +1004,6 @@ footer span {
 }
 
 .big-emotional {
-
     text-align: center;
 
     font-family:
@@ -957,7 +1018,6 @@ footer span {
 }
 
 .final-emotion {
-
     text-align: center;
 
     font-family:
@@ -972,14 +1032,11 @@ footer span {
 }
 
 .final-emotion strong {
-
     color: var(--gold-light);
-
     font-size: 25px;
 }
 
 .quote-line {
-
     margin-top: 30px;
 
     padding-top: 25px;
@@ -1000,13 +1057,7 @@ footer span {
     font-style: italic;
 }
 
-
-/* ==============================
-   STORY CLOSE BUTTON
-============================== */
-
 .close-story-btn {
-
     width: 100%;
 
     margin-top: 30px;
@@ -1026,40 +1077,25 @@ footer span {
 
     color: #17130b;
 
-    font-family: inherit;
-
     font-weight: 700;
 
     cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.close-story-btn:hover {
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 30px
-        rgba(214,179,106,0.2);
 }
 
 
-/* ==============================
+/* =====================================================
    CONFETTI
-============================== */
+===================================================== */
 
 .confetti {
-
     position: fixed;
 
     width: 8px;
-
     height: 14px;
 
     top: -20px;
 
-    z-index: 999;
+    z-index: 9999;
 
     animation:
         fall 2.8s linear forwards;
@@ -1068,7 +1104,6 @@ footer span {
 @keyframes fall {
 
     0% {
-
         transform:
             translateY(0)
             rotate(0deg);
@@ -1077,7 +1112,6 @@ footer span {
     }
 
     100% {
-
         transform:
             translateY(110vh)
             rotate(720deg);
@@ -1087,295 +1121,333 @@ footer span {
 }
 
 
-/* ==============================
+/* =====================================================
    MOBILE
-============================== */
+===================================================== */
 
 @media (max-width: 700px) {
 
     .navbar {
+        padding: 17px 18px;
+    }
 
-        padding:
-            18px 20px;
+    .logo {
+        gap: 9px;
+    }
+
+    .logo > span {
+        width: 38px;
+        height: 38px;
+    }
+
+    .logo strong {
+        font-size: 13px;
     }
 
     .nav-status {
-
         display: none;
     }
 
+
+    /* OPENING */
+
+    .opening-small {
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    .opening-content h1 {
+        font-size: 43px;
+    }
+
+    .opening-content p {
+        font-size: 19px;
+    }
+
+
+    /* HERO */
+
     .hero {
-
         min-height: auto;
+        padding: 75px 18px 70px;
+    }
 
-        padding:
-            75px 20px 90px;
+    .eyebrow {
+        font-size: 8px;
+        letter-spacing: 3px;
     }
 
     .hero h1 {
-
-        font-size: 48px;
+        font-size: 46px;
     }
 
     .hero-text {
-
         font-size: 14px;
+        line-height: 1.7;
     }
 
-    .event-date {
 
-        margin-top: 35px;
+    /* DATE */
+
+    .event-date {
+        margin: 35px auto 30px;
+        padding: 13px 25px;
     }
 
     .date-number {
-
         font-size: 55px;
     }
 
-    .main-question h2 {
+    .date-info strong {
+        font-size: 12px;
+    }
 
+
+    /* DETAILS */
+
+    .event-details {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .detail-card {
+        min-width: 0;
+        width: 100%;
+    }
+
+
+    /* QUESTION */
+
+    .main-question {
+        margin-top: 50px;
+    }
+
+    .main-question h2 {
         font-size: 27px;
     }
 
-    .choice-buttons {
 
+    /* BUTTONS */
+
+    .choice-buttons {
         flex-direction: column;
     }
 
     .btn {
-
         width: 100%;
+        padding: 16px 20px;
+    }
+
+
+    /* WHY */
+
+    .why-section {
+        padding:
+            10px 18px 65px;
     }
 
     .why-btn {
-
         width: 100%;
+        min-width: 0;
+    }
 
-        max-width: 340px;
+
+    /* MEMORY */
+
+    .memory-section {
+        padding:
+            75px 18px;
     }
 
     .memory-section h2,
     .whatsapp-content h2 {
+        font-size: 31px;
+    }
 
-        font-size: 32px;
+    .memory-section > p {
+        font-size: 13px;
+        margin-bottom: 45px;
     }
 
     .memory-line {
-
         flex-direction: column;
+        gap: 15px;
     }
 
     .line {
-
         width: 1px;
-
-        height: 45px;
+        height: 35px;
     }
 
-    .whatsapp-section {
 
+    /* WHATSAPP */
+
+    .whatsapp-section {
         margin:
-            20px;
+            20px 15px 70px;
 
         padding:
-            30px 22px;
+            30px 20px;
 
         flex-direction: column;
 
         text-align: center;
     }
 
-    .whatsapp-features {
+    .whatsapp-icon {
+        font-size: 50px;
+    }
 
+    .whatsapp-features {
         justify-content: center;
     }
 
-    .modal-box {
 
+    /* MODALS */
+
+    .modal {
         padding:
-            30px 22px;
+            12px;
     }
 
-    .why-modal-box {
-
-        max-height: 90vh;
-
+    .modal-box {
+        max-height: 92vh;
         padding:
-            35px 22px;
+            32px 20px;
+        border-radius: 20px;
+    }
+
+    .modal-box h2 {
+        font-size: 29px;
+    }
+
+
+    /* WHY MODAL */
+
+    .why-modal-box {
+        padding:
+            35px 20px;
     }
 
     .why-modal-box h2 {
-
-        font-size: 32px;
+        font-size: 31px;
     }
 
     .emotional-message {
-
         font-size: 12px;
-
         line-height: 1.8;
     }
 
     .highlight-line {
-
         font-size: 16px;
     }
 
     .big-emotional {
+        font-size: 18px;
+    }
 
+    .final-emotion {
         font-size: 18px;
     }
 
     .final-emotion strong {
-
         font-size: 21px;
     }
+
+    .quote-line {
+        font-size: 15px;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        padding:
+            45px 18px;
+    }
+
 }
 /* =========================================
-   OPENING CELEBRATION
+   PAGE NAVIGATION
 ========================================= */
 
-#openingCelebration {
+.page-navigation {
     position: fixed;
-    inset: 0;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
 
-    background:
-        radial-gradient(
-            circle at center,
-            #17130d 0%,
-            #080808 45%,
-            #020202 100%
-        );
-
-    z-index: 99999;
+    z-index: 500;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
 
-    overflow: hidden;
+    padding: 7px;
 
-    transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
+    background: rgba(15,15,18,0.82);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 50px;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.35);
 }
 
-#openingCelebration.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+.page-navigation button {
+    border: none;
+
+    background: transparent;
+
+    color: #999;
+
+    padding: 10px 16px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    transition: 0.3s;
 }
 
-#fireworksCanvas {
-    position: absolute;
-    inset: 0;
+.page-navigation button:hover {
+    color: white;
 
-    width: 100%;
-    height: 100%;
+    background:
+        rgba(255,255,255,0.08);
 }
 
-.opening-content {
-    position: relative;
+.page-navigation #homeBtn {
+    color: #f1d99a;
 
-    z-index: 5;
-
-    text-align: center;
-
-    padding: 30px;
-
-    animation:
-        openingReveal 2s ease forwards;
-}
-
-.opening-small {
-    color: var(--gold);
-
-    font-size: 10px;
-
-    letter-spacing: 6px;
-
-    margin-bottom: 20px;
-}
-
-.opening-content h1 {
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size:
-        clamp(45px, 8vw, 85px);
-
-    line-height: 1;
-
-    color: #f7f5f0;
-
-    text-shadow:
-        0 0 35px
-        rgba(214,179,106,0.25);
-}
-
-.opening-content h1 span {
-    display: block;
-
-    color: var(--gold-light);
-
-    font-style: italic;
-
-    margin-top: 8px;
-}
-
-.opening-content p {
-    margin-top: 25px;
-
-    color: #ddd;
-
-    font-family:
-        "Playfair Display",
-        serif;
-
-    font-size: 22px;
-}
-
-.opening-line {
-    width: 70px;
-
-    height: 1px;
-
-    background: var(--gold);
-
-    margin: 25px auto;
-}
-
-.opening-content small {
-    color: #777;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
+    border:
+        1px solid rgba(214,179,106,0.25);
 }
 
 
-@keyframes openingReveal {
+/* MOBILE */
 
-    0% {
-        opacity: 0;
-        transform:
-            scale(0.85)
-            translateY(15px);
+@media (max-width: 600px) {
+
+    .page-navigation {
+        bottom: 12px;
+
+        width: calc(100% - 30px);
+
+        justify-content: space-between;
     }
 
-    60% {
-        opacity: 1;
-        transform:
-            scale(1.02)
-            translateY(0);
-    }
+    .page-navigation button {
+        flex: 1;
 
-    100% {
-        opacity: 1;
-        transform:
-            scale(1)
-            translateY(0);
+        padding: 11px 8px;
+
+        font-size: 10px;
     }
 
 }
