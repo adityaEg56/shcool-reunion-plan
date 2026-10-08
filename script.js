@@ -1,7 +1,15 @@
 // =====================================================
-// SCHOOL UNION 2026
-// FINAL WEBSITE SCRIPT
+// SCHOOL REUNION 2026
+// GOOGLE SHEET CONNECTED VERSION
 // =====================================================
+
+
+// =====================================================
+// GOOGLE APPS SCRIPT URL
+// =====================================================
+
+const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbySutxV8zivph4S-fek_7rIXPXBLN5SywjnLNu0G8pRgv1Xl0iwEdaA_MflMjluVm6G/exec";
 
 
 // =====================================================
@@ -30,8 +38,13 @@ window.addEventListener("load", () => {
 
     function resizeCanvas() {
 
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
+        width =
+            canvas.width =
+            window.innerWidth;
+
+        height =
+            canvas.height =
+            window.innerHeight;
 
     }
 
@@ -79,18 +92,26 @@ window.addEventListener("load", () => {
         explode() {
 
             const count =
-                55 + Math.floor(
+                55 +
+                Math.floor(
                     Math.random() * 35
                 );
 
 
-            for (let i = 0; i < count; i++) {
+            for (
+                let i = 0;
+                i < count;
+                i++
+            ) {
 
                 const angle =
-                    Math.PI * 2 * (i / count);
+                    Math.PI *
+                    2 *
+                    (i / count);
 
                 const speed =
-                    2 + Math.random() * 5;
+                    2 +
+                    Math.random() * 5;
 
 
                 particles.push(
@@ -146,10 +167,12 @@ window.addEventListener("load", () => {
             this.y = y;
 
             this.vx =
-                Math.cos(angle) * speed;
+                Math.cos(angle) *
+                speed;
 
             this.vy =
-                Math.sin(angle) * speed;
+                Math.sin(angle) *
+                speed;
 
             this.life = 1;
 
@@ -216,7 +239,7 @@ window.addEventListener("load", () => {
 
 
     // ---------------------------------------------
-    // LAUNCH
+    // LAUNCH FIREWORK
     // ---------------------------------------------
 
     function launchFirework() {
@@ -298,7 +321,9 @@ window.addEventListener("load", () => {
             );
 
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(
+            animate
+        );
 
     }
 
@@ -349,7 +374,9 @@ window.addEventListener("load", () => {
 
     setTimeout(() => {
 
-        opening.classList.add("hide");
+        opening.classList.add(
+            "hide"
+        );
 
     }, 4200);
 
@@ -369,25 +396,39 @@ window.addEventListener("load", () => {
 // =====================================================
 
 const interestedBtn =
-    document.getElementById("interestedBtn");
+    document.getElementById(
+        "interestedBtn"
+    );
 
 const skipBtn =
-    document.getElementById("skipBtn");
+    document.getElementById(
+        "skipBtn"
+    );
 
 const interestModal =
-    document.getElementById("interestModal");
+    document.getElementById(
+        "interestModal"
+    );
 
 const successModal =
-    document.getElementById("successModal");
+    document.getElementById(
+        "successModal"
+    );
 
 const skipModal =
-    document.getElementById("skipModal");
+    document.getElementById(
+        "skipModal"
+    );
 
 const finalSkipModal =
-    document.getElementById("finalSkipModal");
+    document.getElementById(
+        "finalSkipModal"
+    );
 
 const whyModal =
-    document.getElementById("whyModal");
+    document.getElementById(
+        "whyModal"
+    );
 
 
 
@@ -396,31 +437,49 @@ const whyModal =
 // =====================================================
 
 const closeInterest =
-    document.getElementById("closeInterest");
+    document.getElementById(
+        "closeInterest"
+    );
 
 const closeSkip =
-    document.getElementById("closeSkip");
+    document.getElementById(
+        "closeSkip"
+    );
 
 const closeWhy =
-    document.getElementById("closeWhy");
+    document.getElementById(
+        "closeWhy"
+    );
 
 const closeStory =
-    document.getElementById("closeStory");
+    document.getElementById(
+        "closeStory"
+    );
 
 const doneBtn =
-    document.getElementById("doneBtn");
+    document.getElementById(
+        "doneBtn"
+    );
 
 const thinkAgain =
-    document.getElementById("thinkAgain");
+    document.getElementById(
+        "thinkAgain"
+    );
 
 const finalSkip =
-    document.getElementById("finalSkip");
+    document.getElementById(
+        "finalSkip"
+    );
 
 const exitBtn =
-    document.getElementById("exitBtn");
+    document.getElementById(
+        "exitBtn"
+    );
 
 const whyBtn =
-    document.getElementById("whyBtn");
+    document.getElementById(
+        "whyBtn"
+    );
 
 
 
@@ -434,9 +493,13 @@ if (whyBtn) {
         "click",
         () => {
 
-            whyModal.classList.add(
-                "active"
-            );
+            if (whyModal) {
+
+                whyModal.classList.add(
+                    "active"
+                );
+
+            }
 
         }
     );
@@ -450,9 +513,13 @@ if (closeWhy) {
         "click",
         () => {
 
-            whyModal.classList.remove(
-                "active"
-            );
+            if (whyModal) {
+
+                whyModal.classList.remove(
+                    "active"
+                );
+
+            }
 
         }
     );
@@ -466,9 +533,13 @@ if (closeStory) {
         "click",
         () => {
 
-            whyModal.classList.remove(
-                "active"
-            );
+            if (whyModal) {
+
+                whyModal.classList.remove(
+                    "active"
+                );
+
+            }
 
         }
     );
@@ -481,18 +552,26 @@ if (closeStory) {
 // INTERESTED
 // =====================================================
 
-interestedBtn.addEventListener(
-    "click",
-    () => {
+if (interestedBtn) {
 
-        interestModal.classList.add(
-            "active"
-        );
+    interestedBtn.addEventListener(
+        "click",
+        () => {
 
-        createConfetti();
+            if (interestModal) {
 
-    }
-);
+                interestModal.classList.add(
+                    "active"
+                );
+
+            }
+
+            createConfetti();
+
+        }
+    );
+
+}
 
 
 
@@ -500,16 +579,24 @@ interestedBtn.addEventListener(
 // CLOSE INTEREST
 // =====================================================
 
-closeInterest.addEventListener(
-    "click",
-    () => {
+if (closeInterest) {
 
-        interestModal.classList.remove(
-            "active"
-        );
+    closeInterest.addEventListener(
+        "click",
+        () => {
 
-    }
-);
+            if (interestModal) {
+
+                interestModal.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 
@@ -517,16 +604,24 @@ closeInterest.addEventListener(
 // NOT INTERESTED
 // =====================================================
 
-skipBtn.addEventListener(
-    "click",
-    () => {
+if (skipBtn) {
 
-        skipModal.classList.add(
-            "active"
-        );
+    skipBtn.addEventListener(
+        "click",
+        () => {
 
-    }
-);
+            if (skipModal) {
+
+                skipModal.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 
@@ -534,16 +629,24 @@ skipBtn.addEventListener(
 // CLOSE SKIP
 // =====================================================
 
-closeSkip.addEventListener(
-    "click",
-    () => {
+if (closeSkip) {
 
-        skipModal.classList.remove(
-            "active"
-        );
+    closeSkip.addEventListener(
+        "click",
+        () => {
 
-    }
-);
+            if (skipModal) {
+
+                skipModal.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 
@@ -551,22 +654,34 @@ closeSkip.addEventListener(
 // THINK AGAIN
 // =====================================================
 
-thinkAgain.addEventListener(
-    "click",
-    () => {
+if (thinkAgain) {
 
-        skipModal.classList.remove(
-            "active"
-        );
+    thinkAgain.addEventListener(
+        "click",
+        () => {
 
-        interestModal.classList.add(
-            "active"
-        );
+            if (skipModal) {
 
-        createConfetti();
+                skipModal.classList.remove(
+                    "active"
+                );
 
-    }
-);
+            }
+
+            if (interestModal) {
+
+                interestModal.classList.add(
+                    "active"
+                );
+
+            }
+
+            createConfetti();
+
+        }
+    );
+
+}
 
 
 
@@ -574,20 +689,32 @@ thinkAgain.addEventListener(
 // FINAL SKIP
 // =====================================================
 
-finalSkip.addEventListener(
-    "click",
-    () => {
+if (finalSkip) {
 
-        skipModal.classList.remove(
-            "active"
-        );
+    finalSkip.addEventListener(
+        "click",
+        () => {
 
-        finalSkipModal.classList.add(
-            "active"
-        );
+            if (skipModal) {
 
-    }
-);
+                skipModal.classList.remove(
+                    "active"
+                );
+
+            }
+
+            if (finalSkipModal) {
+
+                finalSkipModal.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 
@@ -595,16 +722,24 @@ finalSkip.addEventListener(
 // EXIT
 // =====================================================
 
-exitBtn.addEventListener(
-    "click",
-    () => {
+if (exitBtn) {
 
-        finalSkipModal.classList.remove(
-            "active"
-        );
+    exitBtn.addEventListener(
+        "click",
+        () => {
 
-    }
-);
+            if (finalSkipModal) {
+
+                finalSkipModal.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 
@@ -613,126 +748,186 @@ exitBtn.addEventListener(
 // =====================================================
 
 const interestForm =
-    document.getElementById("interestForm");
+    document.getElementById(
+        "interestForm"
+    );
 
 
-interestForm.addEventListener(
-    "submit",
-    function(event) {
+if (interestForm) {
 
-        event.preventDefault();
+    interestForm.addEventListener(
+        "submit",
+        async function(event) {
 
-
-        const name =
-            document
-                .getElementById("name")
-                .value
-                .trim();
+            event.preventDefault();
 
 
-        const phone =
-            document
-                .getElementById("phone")
-                .value
-                .trim();
+            const name =
+                document
+                    .getElementById("name")
+                    .value
+                    .trim();
 
 
-        const people =
-            document
-                .getElementById("people")
-                .value;
+            const phone =
+                document
+                    .getElementById("phone")
+                    .value
+                    .trim();
 
 
-        // -----------------------------------------
-        // VALIDATION
-        // -----------------------------------------
+            const people =
+                document
+                    .getElementById("people")
+                    .value;
 
-        if (!name) {
 
-            alert(
-                "Bro, naam toh batao 😄"
-            );
+            // -----------------------------------------
+            // VALIDATION
+            // -----------------------------------------
 
-            return;
+            if (!name) {
+
+                alert(
+                    "Bro, naam toh batao 😄"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !/^[0-9]{10}$/.test(
+                    phone
+                )
+            ) {
+
+                alert(
+                    "Please valid 10 digit WhatsApp number enter karo."
+                );
+
+                return;
+
+            }
+
+
+            if (!people) {
+
+                alert(
+                    "Kitne log aa rahe ho, woh select karo."
+                );
+
+                return;
+
+            }
+
+
+            // -----------------------------------------
+            // DATA
+            // -----------------------------------------
+
+            const registrationData = {
+
+                name: name,
+
+                whatsapp: phone,
+
+                people: people
+
+            };
+
+
+            // -----------------------------------------
+            // SEND DATA TO GOOGLE SHEET
+            // -----------------------------------------
+
+            try {
+
+                await fetch(
+                    GOOGLE_SCRIPT_URL,
+                    {
+
+                        method: "POST",
+
+                        mode: "no-cors",
+
+                        headers: {
+
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                registrationData
+                            )
+
+                    }
+                );
+
+
+                // CLOSE INTEREST FORM
+
+                if (interestModal) {
+
+                    interestModal.classList.remove(
+                        "active"
+                    );
+
+                }
+
+
+                // SHOW SUCCESS
+
+                setTimeout(
+                    () => {
+
+                        if (successModal) {
+
+                            successModal.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                        createConfetti();
+
+                    },
+                    250
+                );
+
+
+                // CLEAR FORM
+
+                interestForm.reset();
+
+
+                console.log(
+                    "School Reunion registration sent:",
+                    registrationData
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Google Sheet Error:",
+                    error
+                );
+
+
+                alert(
+                    "Bro, data submit nahi ho paya. Internet check karke dobara try karo."
+                );
+
+            }
 
         }
+    );
 
-
-        if (
-            !/^[0-9]{10}$/.test(phone)
-        ) {
-
-            alert(
-                "Please valid 10 digit WhatsApp number enter karo."
-            );
-
-            return;
-
-        }
-
-
-        if (!people) {
-
-            alert(
-                "Kitne log aa rahe ho, woh select karo."
-            );
-
-            return;
-
-        }
-
-
-        // -----------------------------------------
-        // CLOSE FORM
-        // -----------------------------------------
-
-        interestModal.classList.remove(
-            "active"
-        );
-
-
-        // -----------------------------------------
-        // SHOW SUCCESS
-        // -----------------------------------------
-
-        setTimeout(() => {
-
-            successModal.classList.add(
-                "active"
-            );
-
-            createConfetti();
-
-        }, 250);
-
-
-        // -----------------------------------------
-        // TEMPORARY DATA
-        // -----------------------------------------
-        //
-        // Real private database later connect hoga.
-        // Abhi testing ke liye console mein data.
-        //
-        // -----------------------------------------
-
-        console.log({
-
-            name: name,
-
-            whatsapp: phone,
-
-            people: people,
-
-            interestStatus:
-                "Interested",
-
-            paymentStatus:
-                "Pending"
-
-        });
-
-    }
-);
+}
 
 
 
@@ -740,16 +935,24 @@ interestForm.addEventListener(
 // SUCCESS CLOSE
 // =====================================================
 
-doneBtn.addEventListener(
-    "click",
-    () => {
+if (doneBtn) {
 
-        successModal.classList.remove(
-            "active"
-        );
+    doneBtn.addEventListener(
+        "click",
+        () => {
 
-    }
-);
+            if (successModal) {
+
+                successModal.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 
@@ -759,26 +962,28 @@ doneBtn.addEventListener(
 
 document
     .querySelectorAll(".modal")
-    .forEach(modal => {
+    .forEach(
+        modal => {
 
-        modal.addEventListener(
-            "click",
-            event => {
+            modal.addEventListener(
+                "click",
+                event => {
 
-                if (
-                    event.target === modal
-                ) {
+                    if (
+                        event.target === modal
+                    ) {
 
-                    modal.classList.remove(
-                        "active"
-                    );
+                        modal.classList.remove(
+                            "active"
+                        );
+
+                    }
 
                 }
+            );
 
-            }
-        );
-
-    });
+        }
+    );
 
 
 
@@ -796,13 +1001,15 @@ document.addEventListener(
 
             document
                 .querySelectorAll(".modal")
-                .forEach(modal => {
+                .forEach(
+                    modal => {
 
-                    modal.classList.remove(
-                        "active"
-                    );
+                        modal.classList.remove(
+                            "active"
+                        );
 
-                });
+                    }
+                );
 
         }
 
@@ -821,6 +1028,9 @@ function createConfetti() {
         document.getElementById(
             "confetti-container"
         );
+
+
+    if (!container) return;
 
 
     const symbols = [
@@ -852,34 +1062,39 @@ function createConfetti() {
         confetti.innerHTML =
             symbols[
                 Math.floor(
-                    Math.random()
-                    * symbols.length
+                    Math.random() *
+                    symbols.length
                 )
             ];
 
 
         confetti.style.left =
-            Math.random() * 100 + "vw";
+            Math.random() *
+            100 +
+            "vw";
 
 
         confetti.style.fontSize =
             (
-                Math.random() * 10
-                + 10
-            ) + "px";
+                Math.random() * 10 +
+                10
+            ) +
+            "px";
 
 
         confetti.style.animationDuration =
             (
-                Math.random() * 1.5
-                + 2
-            ) + "s";
+                Math.random() * 1.5 +
+                2
+            ) +
+            "s";
 
 
         confetti.style.animationDelay =
             (
                 Math.random() * 0.5
-            ) + "s";
+            ) +
+            "s";
 
 
         container.appendChild(
@@ -899,51 +1114,103 @@ function createConfetti() {
     }
 
 }
-// =============================================
+
+
+
+// =====================================================
 // PAGE NAVIGATION
-// =============================================
+// =====================================================
 
 const backBtn =
-    document.getElementById("backBtn");
+    document.getElementById(
+        "backBtn"
+    );
 
 const homeBtn =
-    document.getElementById("homeBtn");
+    document.getElementById(
+        "homeBtn"
+    );
 
 const nextBtn =
-    document.getElementById("nextBtn");
+    document.getElementById(
+        "nextBtn"
+    );
 
 
+
+// ---------------------------------------------
 // BACK
+// ---------------------------------------------
 
-backBtn.addEventListener("click", () => {
+if (backBtn) {
 
-    window.scrollBy({
-        top: -window.innerHeight * 0.85,
-        behavior: "smooth"
-    });
+    backBtn.addEventListener(
+        "click",
+        () => {
 
-});
+            window.scrollBy({
+
+                top:
+                    -window.innerHeight *
+                    0.85,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
+
+}
 
 
+
+// ---------------------------------------------
 // HOME
+// ---------------------------------------------
 
-homeBtn.addEventListener("click", () => {
+if (homeBtn) {
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    homeBtn.addEventListener(
+        "click",
+        () => {
 
-});
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
+
+}
 
 
+
+// ---------------------------------------------
 // NEXT
+// ---------------------------------------------
 
-nextBtn.addEventListener("click", () => {
+if (nextBtn) {
 
-    window.scrollBy({
-        top: window.innerHeight * 0.85,
-        behavior: "smooth"
-    });
+    nextBtn.addEventListener(
+        "click",
+        () => {
 
-});
+            window.scrollBy({
+
+                top:
+                    window.innerHeight *
+                    0.85,
+
+                behavior: "smooth"
+
+            });
+
+        }
+    );
+
+}
